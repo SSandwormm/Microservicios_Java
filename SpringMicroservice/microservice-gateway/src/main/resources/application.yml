@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: microservice-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: student-service
+          uri: lb://MSVC-STUDENT
+          predicates:
+            - Path=/api/student/**
+
+        - id: course-service
+          uri: lb://MSVC-COURSE
+          predicates:
+            - Path=/api/course/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
