@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: microservice-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+
+        - id: auth-service
+          uri: lb://microservice-auth
+          predicates:
+            - Path=/auth/**
